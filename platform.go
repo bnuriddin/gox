@@ -69,6 +69,8 @@ var (
 		"amd64p32",
 		"arm",
 		"arm64",
+		"mips",
+		"mipsle",
 		"mips64",
 		"mips64le",
 		"ppc64",
@@ -124,6 +126,11 @@ var (
 
 	// Nothing changed from 1.5 to 1.6
 	Platforms_1_6 = Platforms_1_5
+
+	Platforms_1_9 = append(Platforms_1_6, []Platform{
+		{OS: "linux", Arch: "mips", Default: false},
+		{OS: "linux", Arch: "mipsle", Default: false},
+	}...)
 )
 
 // SupportedPlatforms returns the full list of supported platforms for
@@ -141,8 +148,10 @@ func SupportedPlatforms(v string) []Platform {
 		return Platforms_1_5
 	} else if strings.HasPrefix(v, "go1.6") {
 		return Platforms_1_6
+	} else if strings.HasPrefix(v, "go1.9") {
+		return Platforms_1_9
 	}
 
 	// Assume latest
-	return Platforms_1_6
+	return Platforms_1_9
 }
