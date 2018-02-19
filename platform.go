@@ -131,16 +131,15 @@ var (
 		{OS: "linux", Arch: "mips", Default: false},
 		{OS: "linux", Arch: "mipsle", Default: false},
 	}...)
+
+	// Nothing changed from 1.0 to 1.10
+	Platforms_1_10 = Platforms_1_9
 )
 
 // SupportedPlatforms returns the full list of supported platforms for
 // the version of Go that is
 func SupportedPlatforms(v string) []Platform {
-	if strings.HasPrefix(v, "go1.0") {
-		return Platforms_1_0
-	} else if strings.HasPrefix(v, "go1.1") {
-		return Platforms_1_1
-	} else if strings.HasPrefix(v, "go1.3") {
+	if strings.HasPrefix(v, "go1.3") {
 		return Platforms_1_3
 	} else if strings.HasPrefix(v, "go1.4") {
 		return Platforms_1_4
@@ -150,8 +149,10 @@ func SupportedPlatforms(v string) []Platform {
 		return Platforms_1_6
 	} else if strings.HasPrefix(v, "go1.9") {
 		return Platforms_1_9
+	} else if strings.HasPrefix(v, "go1.10") {
+		return Platforms_1_10
 	}
 
 	// Assume latest
-	return Platforms_1_9
+	return Platforms_1_10
 }
